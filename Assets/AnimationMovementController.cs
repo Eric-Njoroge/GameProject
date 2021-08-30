@@ -9,6 +9,7 @@ public class AnimationMovementController : MonoBehaviour
 	PlayerInput playerInput;
 	CharacterController characterController;
 	Animator animator;
+	private Camera cam;
 
 	//variables to store optimized setter
 	int isWalkingHash;
@@ -23,6 +24,7 @@ public class AnimationMovementController : MonoBehaviour
 	float rotationFactorPerFrame  = 15.0f;
 	float runMultiplier = 3.0f;
 
+
     // Awake is calledd earlier than Start in Unity's event life cycle
     void Awake()
     {
@@ -30,6 +32,8 @@ public class AnimationMovementController : MonoBehaviour
 	playerInput = new PlayerInput();
 	characterController = GetComponent<CharacterController>();
 	animator = GetComponent<Animator>();
+	
+
 
 	isWalkingHash = Animator.StringToHash("isWalking");
 	isRunningHash = Animator.StringToHash("isRunning");
@@ -72,6 +76,7 @@ public class AnimationMovementController : MonoBehaviour
 		currentMovementInput = context.ReadValue<Vector2>();
 		currentMovement.x = currentMovementInput.x;
 		currentMovement.z = currentMovementInput.y;
+		
 		currentRunMovement.x = currentMovementInput.x * runMultiplier;
 		currentRunMovement.z = currentMovementInput.y* runMultiplier;
 		isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y !=0;
